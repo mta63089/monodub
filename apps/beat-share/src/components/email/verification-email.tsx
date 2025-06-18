@@ -1,97 +1,74 @@
 import {
   Body,
   Button,
-  Column,
   Container,
   Head,
   Heading,
   Hr,
   Html,
-  Img,
   Link,
   Preview,
-  Row,
   Section,
   Tailwind,
   Text,
 } from "@react-email/components";
 
-interface BetterAuthInviteUserEmailProps {
+interface VerificationEmailProps {
   username?: string;
-  invitedByUsername?: string;
-  invitedByEmail?: string;
-  teamName?: string;
-  teamImage?: string;
-  inviteLink?: string;
+  url?: string;
 }
 
 export const VerificationEmail = ({
   username,
-  invitedByUsername,
-  invitedByEmail,
-  teamName,
-  teamImage,
-  inviteLink,
-}: BetterAuthInviteUserEmailProps) => {
-  const previewText = `Join ${invitedByUsername} on BetterAuth`;
+  url,
+}: VerificationEmailProps) => {
+  const previewText = `Verify your email to activate your BeatShare account`;
+
   return (
     <Html>
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
-        <Body className="bg-white my-auto mx-auto font-sans px-2">
-          <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
-            <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-              BeatShare
+        <Body className="bg-white font-sans px-4 my-auto mx-auto">
+          <Container className="border border-solid border-[#eaeaea] rounded-md my-10 mx-auto p-6 max-w-xl">
+            <Heading className="text-black text-2xl font-bold text-center mb-4">
+              Verify your email address
             </Heading>
-            <Text className="text-black text-[14px] leading-[24px]">
-              Hello there,
+
+            <Text className="text-black text-base leading-relaxed">
+              Hi {username ?? "there"},
             </Text>
-            <Text className="text-black text-[14px] leading-[24px]">
-              <strong>{invitedByUsername}</strong> (
-              <Link
-                href={`mailto:${invitedByEmail}`}
-                className="text-blue-600 no-underline"
-              >
-                {invitedByEmail}
-              </Link>
-              ) has invited you to the <strong>{teamName}</strong> team on{" "}
-              <strong>Better Auth</strong>.
+
+            <Text className="text-black text-base leading-relaxed">
+              Thank you for signing up for <strong>BeatShare</strong>. To get
+              started, please verify your email address by clicking the button
+              below.
             </Text>
-            <Section>
-              {teamImage ? (
-                <Row>
-                  <Column align="left">
-                    <Img
-                      className="rounded-full"
-                      src={teamImage}
-                      width="64"
-                      height="64"
-                      fetchPriority="high"
-                    />
-                  </Column>
-                </Row>
-              ) : null}
-            </Section>
-            <Section className="text-center mt-[32px] mb-[32px]">
+
+            <Section className="text-center my-8">
               <Button
-                className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
-                href={inviteLink}
+                className="bg-[#000000] rounded-md text-white text-sm font-medium px-5 py-3 no-underline"
+                href={url}
               >
-                Join the team
+                Verify Email
               </Button>
             </Section>
-            <Text className="text-black text-[14px] leading-[24px]">
-              or copy and paste this URL into your browser:{" "}
-              <Link href={inviteLink} className="text-blue-600 no-underline">
-                {inviteLink}
-              </Link>
+
+            <Text className="text-black text-base leading-relaxed">
+              If the button above doesn&apos;t work, copy and paste the
+              following link into your browser:
             </Text>
-            <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
-            <Text className="text-[#666666] text-[12px] leading-[24px]">
-              This invitation was intended for{" "}
-              <span className="text-black">{username}</span>. If you were not
-              expecting this invitation, you can ignore this email.
+            <Text className="text-blue-600 text-sm break-words">
+              <Link href={url}>{url}</Link>
+            </Text>
+
+            <Hr className="border-t border-gray-300 my-6" />
+
+            <Text className="text-gray-600 text-xs leading-relaxed">
+              This email was sent to{" "}
+              <span className="text-black">{username ?? "your address"}</span>.
+              If you didn&apos;t sign up for BeatShare, you can safely ignore
+              this email.
             </Text>
           </Container>
         </Body>
@@ -100,7 +77,6 @@ export const VerificationEmail = ({
   );
 };
 
-export function reactVerificationEmail(props: BetterAuthInviteUserEmailProps) {
-  console.log(props);
+export function reactVerificationEmail(props: VerificationEmailProps) {
   return <VerificationEmail {...props} />;
 }
