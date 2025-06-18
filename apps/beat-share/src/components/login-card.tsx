@@ -1,3 +1,4 @@
+// src/components/login-card.tsx
 "use client";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -83,7 +84,7 @@ export default function LoginCard() {
             type="submit"
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            Sign Up
+            Login
           </Button>
         </CardFooter>
       </form>

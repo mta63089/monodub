@@ -11,6 +11,8 @@ export default async function DashboardPage() {
 
   return (
     <div>
+      <b>Welcome </b>
+      {session.data.user.name}
       <DashboardPage />
     </div>
   );

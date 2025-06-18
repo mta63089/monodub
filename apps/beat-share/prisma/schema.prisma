@@ -10,21 +10,50 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String  
-  email     String   @unique
-  uploads   Upload[]
-  image     String
-  sessions  Session[]
-  createdAt DateTime @default(now())
+  id              String   @id @default(cuid())
+  name            String  
+  email           String   @unique
+  emailVerified   Boolean
+  uploads         Upload[]
+  account         Account[]
+  image           String?
+  sessions        Session[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
 }
 
 model Session {
-    id          String   @id @default(cuid())
-    expiresAt   DateTime 
-    token       String   
-    userId      String
-    user        User     @relation(fields: [userId], references: [id])
+  id          String   @id @default(cuid())
+  expiresAt   DateTime 
+  token       String   
+  userId      String
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Account {
+  id                      String   @id @default(cuid())
+  userId                  String   
+  user                    User     @relation(fields: [userId], references: [id])
+
+  accountId               String
+  providerId              String
+
+  accessToken             String?  
+  refreshToken            String?  
+  accessTokenExpiresAt    DateTime?
+  refreshTokenExpiresAt   DateTime?
+  scope                   String?
+  idToken                 String?
+  password                String?
+
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@unique([providerId, accountId])
 }
 
 model Upload {
@@ -39,4 +68,13 @@ model Upload {
   waveform    String?
   likes       Int      @default(0)
   createdAt   DateTime @default(now())
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

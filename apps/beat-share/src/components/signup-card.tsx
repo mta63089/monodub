@@ -19,11 +19,12 @@ export default function SignupCard() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !username) {
       setError("All fields are required");
       return;
     }
@@ -54,6 +55,19 @@ export default function SignupCard() {
             </Alert>
           )}
           <div className="space-y-2">
+            <Label htmlFor="username-1" className="text-foreground">
+              Name
+            </Label>
+            <Input
+              id="username-1"
+              type="text"
+              placeholder="CoolGuy9999"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="border-input bg-background text-foreground"
+            />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="name" className="text-foreground">
               Name
             </Label>
@@ -61,7 +75,6 @@ export default function SignupCard() {
               id="name"
               type="text"
               placeholder="John Doe"
-              datatype=""
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="border-input bg-background text-foreground"
