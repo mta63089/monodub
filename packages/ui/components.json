@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "aliases": {
+    "components": "@monodub/ui/components",
+    "hooks": "@monodub/ui/hooks",
+    "lib": "@monodub/ui/lib",
+    "ui": "@monodub/ui/components",
+    "utils": "@monodub/ui/lib/utils"
+  },
+  "iconLibrary": "lucide",
+  "rsc": true,
+  "style": "new-york",
+  "tailwind": {
+    "baseColor": "neutral",
+    "config": "",
+    "css": "src/styles/globals.css",
+    "cssVariables": true
+  },
+  "tsx": true
+}
