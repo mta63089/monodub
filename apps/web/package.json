@@ -9,6 +9,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.842.0",
+    "@aws-sdk/s3-request-presigner": "^3.842.0",
     "@monodub/ui": "workspace:*",
     "next": "15.3.4",
     "react": "^19.0.0",
